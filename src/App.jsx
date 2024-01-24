@@ -1,7 +1,7 @@
 import { useState } from "react";
-import "./App.css";
 import Imperial from "./components/Imperial";
 import Metric from "./components/Metric";
+import "./styles.css";
 
 function App() {
   const [active, setActive] = useState({
@@ -50,8 +50,10 @@ function App() {
 
   return (
     <>
-      <button onClick={() => handleActive("metric")}>Metric</button>
-      <button onClick={() => handleActive("imperial")}>Imperial</button>
+      <div className="system">
+        <button onClick={() => handleActive("metric")}>Metric</button>
+        <button onClick={() => handleActive("imperial")}>Imperial</button>
+      </div>
 
       {active.metric && (
         <Metric
