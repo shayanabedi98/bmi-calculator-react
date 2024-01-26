@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Imperial from "./components/Imperial";
 import Metric from "./components/Metric";
-import "./styles.css";
+import Systems from "./components/Systems";
+import { motion } from "framer-motion";
 
 function App() {
   const [active, setActive] = useState({
@@ -10,11 +11,11 @@ function App() {
   });
 
   const [input, setInput] = useState({
-    kg: "Kilograms",
-    cm: "Centimeters",
-    lbs: "Pounds",
-    inch: "Inches",
-    ft: "Feet",
+    kg: "kg",
+    cm: "cm",
+    lbs: "lbs",
+    inch: "in",
+    ft: "ft",
   });
 
   const [bmi, setBmi] = useState(0);
@@ -38,25 +39,29 @@ function App() {
   };
 
   const calculateImperial = () => {
-    const newInch = input.ft * 12 + parseFloat(input.inch);
-    const calc = Math.round((input.lbs / Math.pow(newInch, 2)) * 703);
-    setBmi(calc);
+    const { ft, inch, lbs } = input;
+    if (ft <= 9 && ft > 0 && inch <= 11 && inch >= 0 && lbs <= 700 && lbs > 0) {
+      const newInch = input.ft * 12 + parseFloat(input.inch);
+      const calc = Math.round((input.lbs / Math.pow(newInch, 2)) * 703);
+      setBmi(calc);
+    }
   };
 
   const calculateMetric = () => {
-    const calc = Math.round(input.kg / Math.pow(input.cm / 100, 2));
-    setBmi(calc);
+    const { kg, cm } = input;
+    if (kg <= 500 && kg > 0 && cm <= 300 && cm > 0) {
+      const calc = Math.round(kg / Math.pow(cm / 100, 2));
+      setBmi(calc);
+    }
   };
 
   return (
-    <>
-      <div className="system">
-        <button onClick={() => handleActive("metric")}>Metric</button>
-        <button onClick={() => handleActive("imperial")}>Imperial</button>
-      </div>
-
+    <div className="grid-container">
+      <h1>Adult BMI Calculator</h1>
+      <Systems handleActive={handleActive} />
       {active.metric && (
         <Metric
+          key="metric"
           handleChange={handleChange}
           input={input}
           calculateMetric={calculateMetric}
@@ -64,17 +69,19 @@ function App() {
       )}
       {active.imperial && (
         <Imperial
+          key="imperial"
           handleChange={handleChange}
           input={input}
           calculateImperial={calculateImperial}
         />
       )}
+
       {bmi > 0 && (
-        <div>
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <h1>Your BMI is {bmi}</h1>
-        </div>
+        </motion.div>
       )}
-    </>
+    </div>
   );
 }
 

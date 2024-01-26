@@ -1,10 +1,16 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 const Imperial = ({ handleChange, input, calculateImperial }) => {
   return (
-    <div className="input-container">
-      <form onSubmit={(e) => e.preventDefault()} action="">
-        <label htmlFor="lbs">Weight</label>
+    <motion.div
+      className="input-container"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ opacity: { duration: 0.2, delay: 0.3 } }}
+    >
+      <motion.form onSubmit={(e) => e.preventDefault()} action="">
+        <label htmlFor="lbs">Weight in Pounds</label>
         <input
           placeholder={input.lbs}
           onChange={handleChange}
@@ -13,10 +19,21 @@ const Imperial = ({ handleChange, input, calculateImperial }) => {
           type="number"
           step={0.01}
           min={1}
-          max={500}
+          max={700}
           name="lbs"
         />
-        <label htmlFor="inch">Height</label>
+        <label htmlFor="ft">Height in Feet</label>
+        <input
+          placeholder={input.ft}
+          onChange={handleChange}
+          value={input.ft}
+          required
+          type="number"
+          min={1}
+          max={9}
+          name="ft"
+        />
+        <label htmlFor="inch">Height in Inches</label>
         <input
           placeholder={input.inch}
           onChange={handleChange}
@@ -28,20 +45,9 @@ const Imperial = ({ handleChange, input, calculateImperial }) => {
           max={11}
           name="inch"
         />
-        <label htmlFor="ft">Height</label>
-        <input
-          placeholder={input.ft}
-          onChange={handleChange}
-          value={input.ft}
-          required
-          type="number"
-          min={1}
-          max={9}
-          name="ft"
-        />
         <button onClick={calculateImperial}>Calculate</button>
-      </form>
-    </div>
+      </motion.form>
+    </motion.div>
   );
 };
 

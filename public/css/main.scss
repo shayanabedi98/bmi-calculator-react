@@ -1,0 +1,95 @@
+@import "./resets";
+@import "./variables";
+
+%button-shared {
+  background-color: $primary-color;
+  color: $background-color;
+  border: none;
+  padding: 10px 5px;
+  cursor: pointer;
+  transition: all 0.1s ease-in;
+
+  &:hover {
+    background-color: lighten($primary-color, 10%);
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+}
+
+@mixin gridCenter {
+  display: grid;
+  place-items: center;
+}
+
+@mixin mobile {
+  @media (max-width: 800px) {
+    @content;
+  }
+}
+
+body {
+  background-color: $background-color;
+}
+
+.grid-container {
+  margin-top: 5%;
+  @include gridCenter;
+
+  h1 {
+    font-weight: weight(bold);
+  }
+
+  .systems {
+    @include gridCenter;
+    grid-template-columns: 1fr 1fr;
+    width: 20%;
+
+    button {
+      @extend %button-shared;
+      width: 100%;
+      box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+      rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    }
+  }
+
+  .input-container {
+    background-color: $accent-color;
+    width: 20%;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+      rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    padding: 25px 20px;
+
+    form {
+      background-color: $accent-color;
+      display: grid;
+
+      label {
+        background-color: $accent-color;
+        margin: 10px 0 3px 0;
+      }
+
+      input {
+        background-color: $background-color;
+        color: $text-color;
+        outline: none;
+        border: none;
+        padding: 5px 10px;
+      }
+
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      button {
+        @extend %button-shared;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+          rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+          margin-top: 20px;
+      }
+    }
+  }
+}
