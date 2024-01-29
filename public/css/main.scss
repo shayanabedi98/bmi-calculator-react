@@ -23,18 +23,28 @@
   place-items: center;
 }
 
-@mixin mobile {
-  @media (max-width: 800px) {
-    @content;
-  }
-}
+// @mixin mobile {
+//   @media (max-width: 800px) {
+//     @content;
+//   }
+// }
 
 body {
   background-color: $background-color;
 }
 
+.navbar {
+  background-color: $primary-color;
+
+  img {
+    height: 100px;
+    position: relative;
+    left: 50px;
+  }
+}
+
 .grid-container {
-  margin-top: 5%;
+  margin-top: 200px;
   @include gridCenter;
 
   h1 {
@@ -44,7 +54,7 @@ body {
   .systems {
     @include gridCenter;
     grid-template-columns: 1fr 1fr;
-    width: 20%;
+    width: 400px;
 
     button {
       @extend %button-shared;
@@ -56,7 +66,7 @@ body {
 
   .input-container {
     background-color: $accent-color;
-    width: 20%;
+    width: 400px;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
       rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     padding: 25px 20px;
