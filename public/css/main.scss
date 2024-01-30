@@ -1,6 +1,11 @@
 @import "./resets";
 @import "./variables";
 
+@mixin gridCenter {
+  display: grid;
+  place-items: center;
+}
+
 %button-shared {
   background-color: $primary-color;
   color: $background-color;
@@ -9,18 +14,24 @@
   cursor: pointer;
   transition: all 0.1s ease-in;
 
-  &:hover {
-    background-color: lighten($primary-color, 10%);
-  }
-
   &:active {
     box-shadow: none;
   }
 }
 
-@mixin gridCenter {
-  display: grid;
-  place-items: center;
+%weight-shared {
+  @include gridCenter();
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  margin: 15px 0;
+}
+
+%weight-span-shared {
+  color: $background-color;
+  padding: 3px;
+  border-radius: 4px;
+  margin-right: 20px;
+  width: 90px !important;
 }
 
 // @mixin mobile {
@@ -35,38 +46,48 @@ body {
 
 .navbar {
   background-color: $primary-color;
+  justify-items: start;
 
   img {
     height: 100px;
     position: relative;
     left: 50px;
   }
+
+  h1 {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 30px;
+    text-align: center;
+    color: $background-color;
+  }
 }
 
 .grid-container {
-  margin-top: 200px;
+  margin-top: 100px;
   @include gridCenter;
-
-  h1 {
-    font-weight: weight(bold);
-  }
 
   .systems {
     @include gridCenter;
     grid-template-columns: 1fr 1fr;
-    width: 400px;
+    width: $card-width;
 
     button {
       @extend %button-shared;
       width: 100%;
       box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
-      rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+
+      &:hover {
+        background-color: darken($primary-color, 10%) !important;
+      }
     }
   }
 
   .input-container {
     background-color: $accent-color;
-    width: 400px;
+    width: $card-width;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
       rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     padding: 25px 20px;
@@ -98,7 +119,54 @@ body {
         @extend %button-shared;
         box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
           rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-          margin-top: 20px;
+        margin-top: 20px;
+      }
+    }
+  }
+
+  .results {
+    margin-top: 50px;
+    background-color: $accent-color;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    padding: 25px;
+    text-align: center;
+    width: $card-width;
+
+    &-chart {
+      @include gridCenter();
+      width: 100%;
+
+      .under {
+        @extend %weight-shared;
+        span {
+          background-color: rgb(255, 52, 255);
+          @extend %weight-span-shared;
+        }
+      }
+
+      .healthy {
+        @extend %weight-shared;
+        span {
+          background-color: rgb(0, 161, 0);
+          @extend %weight-span-shared;
+        }
+      }
+
+      .over {
+        @extend %weight-shared;
+        span {
+          background-color: rgb(255, 177, 32);
+          @extend %weight-span-shared;
+        }
+      }
+
+      .obese {
+        @extend %weight-shared;
+        span {
+          background-color: rgb(247, 75, 75);
+          @extend %weight-span-shared;
+        }
       }
     }
   }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import Imperial from "./Imperial";
 import Metric from "./Metric";
 import Systems from "./Systems";
+import Results from "./Results";
 import { motion } from "framer-motion";
 
 function Container() {
@@ -29,6 +30,7 @@ function Container() {
         return { ...prevValue, [name]: parseFloat(value) || "" };
       }
     });
+    setBmi(0)
   };
 
   const handleActive = (clicked) => {
@@ -36,6 +38,8 @@ function Container() {
       metric: clicked == "metric",
       imperial: clicked == "imperial",
     });
+
+    setBmi(0)
   };
 
   const calculateImperial = () => {
@@ -58,8 +62,7 @@ function Container() {
   return (
     <>
       <div className="grid-container">
-        <h1>Adult BMI Calculator</h1>
-        <Systems handleActive={handleActive} />
+        <Systems active={active} handleActive={handleActive} />
         {active.metric && (
           <Metric
             key="metric"
@@ -78,9 +81,7 @@ function Container() {
         )}
 
         {bmi > 0 && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <h1>Your BMI is {bmi}</h1>
-          </motion.div>
+          <Results bmi={bmi}/>
         )}
       </div>
     </>
