@@ -1,4 +1,4 @@
-##ADULT BMI Calculator
+## ADULT BMI Calculator
 
 This project was created using Vite + React, SASS, and Framer-motion.
 
