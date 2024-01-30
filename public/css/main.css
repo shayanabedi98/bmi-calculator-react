@@ -15,6 +15,11 @@
   cursor: pointer;
   transition: all 0.1s ease-in;
 }
+@media (hover: hover) and (pointer: fine) {
+  .grid-container .input-container form button:hover, .grid-container .systems button:hover {
+    background-color: #004d4d !important;
+  }
+}
 .grid-container .input-container form button:active, .grid-container .systems button:active {
   box-shadow: none;
 }
@@ -41,20 +46,38 @@ body {
 
 .navbar {
   background-color: #008080;
-  justify-items: start;
+}
+@media (max-width: 1000px) {
+  .navbar {
+    display: grid;
+    place-items: center;
+    height: 150px;
+  }
 }
 .navbar img {
   height: 100px;
   position: relative;
   left: 50px;
 }
+@media (max-width: 1000px) {
+  .navbar img {
+    left: 0;
+    top: -30px;
+  }
+}
 .navbar h1 {
   position: absolute;
   left: 0;
   right: 0;
-  top: 30px;
+  top: 35px;
+  font-size: 26px;
   text-align: center;
   color: #F5F5F5;
+}
+@media (max-width: 1000px) {
+  .navbar h1 {
+    top: 90px;
+  }
 }
 
 .grid-container {
@@ -68,18 +91,25 @@ body {
   grid-template-columns: 1fr 1fr;
   width: 400px;
 }
+@media (max-width: 430px) {
+  .grid-container .systems {
+    width: 330px;
+  }
+}
 .grid-container .systems button {
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-}
-.grid-container .systems button:hover {
-  background-color: #004d4d !important;
 }
 .grid-container .input-container {
   background-color: #dfdfdf;
   width: 400px;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   padding: 25px 20px;
+}
+@media (max-width: 430px) {
+  .grid-container .input-container {
+    width: 330px;
+  }
 }
 .grid-container .input-container form {
   background-color: #dfdfdf;
@@ -108,10 +138,15 @@ body {
 .grid-container .results {
   margin-top: 50px;
   background-color: #dfdfdf;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   padding: 25px;
   text-align: center;
   width: 400px;
+}
+@media (max-width: 430px) {
+  .grid-container .results {
+    width: 330px;
+  }
 }
 .grid-container .results-chart {
   display: grid;

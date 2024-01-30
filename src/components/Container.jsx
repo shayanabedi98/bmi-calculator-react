@@ -3,7 +3,6 @@ import Imperial from "./Imperial";
 import Metric from "./Metric";
 import Systems from "./Systems";
 import Results from "./Results";
-import { motion } from "framer-motion";
 
 function Container() {
   const [active, setActive] = useState({

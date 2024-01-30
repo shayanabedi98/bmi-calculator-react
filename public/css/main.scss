@@ -14,6 +14,12 @@
   cursor: pointer;
   transition: all 0.1s ease-in;
 
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: darken($primary-color, 10%) !important;
+    }
+  }
+
   &:active {
     box-shadow: none;
   }
@@ -34,11 +40,17 @@
   width: 90px !important;
 }
 
-// @mixin mobile {
-//   @media (max-width: 800px) {
-//     @content;
-//   }
-// }
+@mixin tablet {
+  @media (max-width: 1000px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: 430px) {
+    @content;
+  }
+}
 
 body {
   background-color: $background-color;
@@ -46,21 +58,35 @@ body {
 
 .navbar {
   background-color: $primary-color;
-  justify-items: start;
+
+  @include tablet {
+    @include gridCenter();
+    height: 150px;
+  }
 
   img {
     height: 100px;
     position: relative;
     left: 50px;
+
+    @include tablet {
+      left: 0;
+      top: -30px;
+    }
   }
 
   h1 {
     position: absolute;
     left: 0;
     right: 0;
-    top: 30px;
+    top: 35px;
+    font-size: 26px;
     text-align: center;
     color: $background-color;
+
+    @include tablet {
+      top: 90px;
+    }
   }
 }
 
@@ -73,15 +99,15 @@ body {
     grid-template-columns: 1fr 1fr;
     width: $card-width;
 
+    @include mobile {
+      width: $card-width - 70px;
+    }
+
     button {
       @extend %button-shared;
       width: 100%;
       box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
         rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-
-      &:hover {
-        background-color: darken($primary-color, 10%) !important;
-      }
     }
   }
 
@@ -91,6 +117,10 @@ body {
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
       rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     padding: 25px 20px;
+
+    @include mobile {
+      width: $card-width - 70px;
+    }
 
     form {
       background-color: $accent-color;
@@ -127,11 +157,15 @@ body {
   .results {
     margin-top: 50px;
     background-color: $accent-color;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+      rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     padding: 25px;
     text-align: center;
     width: $card-width;
+
+    @include mobile {
+      width: $card-width - 70px;
+    }
 
     &-chart {
       @include gridCenter();
